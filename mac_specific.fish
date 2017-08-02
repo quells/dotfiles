@@ -1,5 +1,5 @@
 function cdf --description 'Change working directory to frontmost Finder window directory'
-    set target (osascript /Users/kwells/Dropbox/Dev/AppleScript/FrontFinderWindowPath.scpt)
+    set target (osascript $HOME/.bin/FrontFinderWindowPath.scpt)
 
     if test $target = "No Finder window found"
         echo $target

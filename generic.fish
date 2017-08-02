@@ -33,5 +33,5 @@ end
 
 set -x PATH $PATH /usr/local/sbin
 
-set -x GOPATH "$HOME/Dropbox/Dev/go"
+set -x GOPATH "$HOME/go"
 set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
