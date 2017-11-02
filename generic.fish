@@ -52,6 +52,14 @@ function passphrase --description 'Generate new passphrase'
     echo (tr -cs A-Za-z '\n' < $HOME/.bin/words.txt | gshuf --random-source=/dev/random -n6)
 end
 
+function cleanpath --description 'Remove duplicate entries in $PATH'
+    set uniq_path (echo $PATH | tr " " "\n" | sort | uniq)
+    set -x PATH
+    for dir in $uniq_path
+        set -x PATH $PATH $dir
+    end
+end
+
 set -x PATH $PATH /usr/local/sbin
 
 set -x GOPATH "$HOME/go"
