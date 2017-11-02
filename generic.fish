@@ -4,7 +4,7 @@ function fish_prompt
     echo -n "] » "
 end
 
-function man --wraps man --description 'Manual pages with color'
+function manc --description 'Manual pages with color'
     set -x LESS_TERMCAP_mb (printf "\e[1;31m")
     set -x LESS_TERMCAP_md (printf "\e[1;31m")
     set -x LESS_TERMCAP_me (printf "\e[0m")
