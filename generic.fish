@@ -23,6 +23,16 @@ function myip --description 'Current external IP address'
     echo (curl --silent http://icanhazip.com)
 end
 
+function lips --description 'List local and external IP addresses'
+    for interface in (networksetup -listallhardwareports | awk "/^Device: /{print \$2}" | sort)
+        set ip (ipconfig getifaddr $interface)
+        [ "$ip" != "" ]; and echo "$interface: $ip"; and continue
+        echo "$interface: inactive"
+    end
+    set ext_ip (dig +short myip.opendns.com @resolver1.opendns.com)
+    [ "$ext_ip" != "" ]; and echo "ext: $ext_ip"; or echo "ext: inactive"
+end
+
 function passphrase --description 'Generate new passphrase'
     echo (tr -cs A-Za-z '\n' < $HOME/.bin/words.txt | gshuf --random-source=/dev/random -n6)
 end
