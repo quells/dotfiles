@@ -33,6 +33,21 @@ function lips --description 'List local and external IP addresses'
     [ "$ext_ip" != "" ]; and echo "ext: $ext_ip"; or echo "ext: inactive"
 end
 
+function hex2rgb --description 'Convert hex string to rgb() string'
+    set hex (echo "$argv[1]" | tr "[:lower:]" "[:upper:]" | perl -pe "s|^\#(.*)\$|\$1|g")
+    if echo "$hex" | grep -q -E "^[A-F0-9]{3}\$"
+        set hex (echo "$hex" | perl -pe "s|(.)|\$1\$1|g")
+    end
+    if echo "$hex" | grep -q -E "^[A-F0-9]{6}\$"
+        set r (echo -s (string split "" -- $hex)[1..2])
+        set g (echo -s (string split "" -- $hex)[3..4])
+        set b (echo -s (string split "" -- $hex)[5..6])
+        printf "rgb(%d,%d,%d)" 0x$r 0x$g 0x$b
+    else
+        echo -n "$argv[1]"
+    end
+end
+
 function passphrase --description 'Generate new passphrase'
     echo (tr -cs A-Za-z '\n' < $HOME/.bin/words.txt | gshuf --random-source=/dev/random -n6)
 end
