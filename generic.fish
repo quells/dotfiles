@@ -1,11 +1,7 @@
 function fish_prompt
-    echo -n '['
-    echo -n (date +'%H:%M')
-    echo -n ' '
-    set_color $fish_color_cwd
-    echo -n (prompt_pwd)
-    set_color normal
-    echo -n '] » '
+    echo -n "["(date +'%H:%M')" "
+    set_color $fish_color_cwd; echo -n (prompt_pwd); set_color normal
+    echo -n "] » "
 end
 
 function man --wraps man --description 'Manual pages with color'
