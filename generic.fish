@@ -23,15 +23,6 @@ function myip --description 'Current external IP address'
     echo (curl --silent http://icanhazip.com)
 end
 
-function lips --description 'List local and external IP addresses'
-    for interface in (networksetup -listallhardwareports | awk "/^Device: /{print \$2}" | sort)
-        set ip (ipconfig getifaddr $interface)
-        [ "$ip" != "" ]; and echo "$interface: $ip"; or echo "$interface: inactive"
-    end
-    set ext_ip (dig +short myip.opendns.com @resolver1.opendns.com)
-    [ "$ext_ip" != "" ]; and echo "ext: $ext_ip"; or echo "ext: inactive"
-end
-
 function hex2rgb --description 'Convert hex string to rgb() string'
     set hex (echo "$argv[1]" | tr "[:lower:]" "[:upper:]" | perl -pe "s|^\#(.*)\$|\$1|g")
     if echo "$hex" | grep -q -E "^[A-F0-9]{3}\$"

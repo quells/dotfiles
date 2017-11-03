@@ -32,6 +32,15 @@ function togblu --description 'Turn Bluetooth on and off to reconnect devices'
     blueutil power 1
 end
 
+function lips --description 'List local and external IP addresses'
+    for interface in (networksetup -listallhardwareports | awk "/^Device: /{print \$2}" | sort)
+        set ip (ipconfig getifaddr $interface)
+        [ "$ip" != "" ]; and echo "$interface: $ip"; or echo "$interface: inactive"
+    end
+    set ext_ip (dig +short myip.opendns.com @resolver1.opendns.com)
+    [ "$ext_ip" != "" ]; and echo "ext: $ext_ip"; or echo "ext: inactive"
+end
+
 function kicklaunch --description 'Kick LaunchServices in the pants'
     /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -seed -r
 end
