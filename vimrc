@@ -1,3 +1,9 @@
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
+" load plugins
+execute pathogen#infect()
 
 " remap leader to comma
 let mapleader=","
@@ -6,6 +12,7 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " colors
 syntax enable
+colorscheme spacegray
 
 " ui
 " show line numbers
