@@ -2,9 +2,6 @@ if &shell =~# 'fish$'
     set shell=sh
 endif
 
-" load plugins
-execute pathogen#infect()
-
 " remap leader to comma
 let mapleader=","
 " ,sv reloads vimrc
@@ -40,3 +37,18 @@ set incsearch
 set hlsearch
 " turn off highlighting with ,<space>
 nnoremap <leader><space> :nohlsearch<CR>
+
+" plug
+" to update: ,sv :PlugInstall
+call plug#begin('~/.vim/plugged')
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'tpope/vim-commentary'
+
+Plug 'dag/vim-fish'
+
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode'
+Plug 'dgryski/vim-godef'
+
+call plug#end()
