@@ -1,3 +1,4 @@
 #!/bin/bash
 
-wget https://tpo.pe/pathogen.vim;
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
