@@ -7,6 +7,9 @@ end
 set -x PATH $PATH /usr/local/sbin
 set -x PATH $PATH $HOME/.bin
 
+alias bc="bc -lq"
+set -x BC_ENV_ARGS $HOME/.bc
+
 # Go
 set -x GOPATH "$HOME/go"
 set -x PATH $PATH /usr/local/go/bin $GOPATH/bin
